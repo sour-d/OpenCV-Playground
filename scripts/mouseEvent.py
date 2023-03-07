@@ -7,14 +7,15 @@ isDrawing = False
 def CreateDrawingHandler(img):
   def DrawingHandler(event, x, y, flags, param):
     global isDrawing
-    print(event, isDrawing)
+
     if event == cv.EVENT_LBUTTONDOWN:
       isDrawing = True
     if event == cv.EVENT_LBUTTONUP:
       isDrawing = False
-      return
+
     if event == cv.EVENT_MOUSEMOVE and isDrawing:
       cv.circle(img, (x, y), 5, (0, 255, 68), -1)
+
     cv.imshow("Draw", img)
 
   return DrawingHandler
@@ -24,6 +25,7 @@ def Draw(img):
   cv.namedWindow("Draw", cv.WINDOW_AUTOSIZE)
   cv.imshow("Draw", img)
   cv.setMouseCallback("Draw", CreateDrawingHandler(img))
+
   while True:
     key = cv.waitKey(1)
     if key == ord('s'):
